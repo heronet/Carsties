@@ -1,5 +1,6 @@
 services:
   postgres:
+    container_name: pgdev
     image: docker.io/postgres
     environment:
       POSTGRES_USER: sirat
@@ -8,5 +9,16 @@ services:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+  mongodb:
+    container_name: mogodev
+    image: docker.io/mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongopw
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodata:/var/lib/mongodb/data
 volumes:
   pgdata:
+  mongodata:
