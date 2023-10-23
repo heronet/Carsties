@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Entities;
-using SearchService.Data.RequestHelpers;
+using SearchService.Utils.RequestHelpers;
 using SearchService.Models;
 
 namespace SearchService.Controllers;
