@@ -59,11 +59,11 @@ public class AuctionsController : ControllerBase
 
         _context.Auctions.Add(auction);
 
-        var result = await _context.SaveChangesAsync() > 0;
-
         var newAuction = _mapper.Map<AuctionDto>(auction);
 
         await _publishEndpoint.Publish(_mapper.Map<AuctionCreated>(newAuction));
+
+        var result = await _context.SaveChangesAsync() > 0;
 
         if (!result)
             return BadRequest("Failed to save data to DB");
@@ -80,6 +80,7 @@ public class AuctionsController : ControllerBase
     {
         var auction = await _context.Auctions
             .Include(x => x.Item)
+            .Where(x => x.Id == id)
             .FirstOrDefaultAsync();
 
         if (auction is null)

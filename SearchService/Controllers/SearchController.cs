@@ -13,7 +13,7 @@ public class SearchController : ControllerBase
     public async Task<ActionResult<List<Item>>> SearchItems([FromQuery] SearchParams searchParams)
     {
         var query = DB.PagedSearch<Item, Item>();
-
+        
         if (!string.IsNullOrEmpty(searchParams.SearchTerm))
         {
             query.Match(Search.Full, searchParams.SearchTerm).SortByTextScore();
